@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+.w-state {
+	max-width: 800px;
+}
+
+/* ------------------------------------------------ */
+
+.part-body {
+	padding-top: 120px;
+}
+
+.section__body {
+	font-size: 1.4rem;
+}
+
+.part__ttl {
+	margin-bottom: 60px;
+	font-size: 2.2rem;
+	letter-spacing: 0.2em;
+}
+
+.document-container .section-body__ttl {
+	font-size: 1.6rem;
+}
+
+@media screen and (min-width: 1024px) {
+	.part-body {
+		padding-top: 200px;
+	}
+}
+
+/* ------------------------------------------------ */
+
+.section-body__ttl {
+	
+}
+
+.chapter__body ul {
+	padding-left: 1.2em;
+}

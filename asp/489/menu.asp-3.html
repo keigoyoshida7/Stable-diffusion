@@ -1,0 +1,1215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<title>旅館　奥の湯 | 方案一覽畫面</title>
+
+			<link rel="shortcut icon" href="/asp/data/user_data/43000032/favicon.ico" type="image/vnd.microsoft.icon"/>
+
+			<link rel="apple-touch-icon-precomposed" href="https://www5.489pro.com/asp/data/user_data/43000032/webclipicon.png" />
+
+<link href="../templates/dt4/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../templates/dt4/css/jquery.lightbox.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../templates/dt4/css/tooltip.style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../templates/dt4/css/thickbox.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 共通スタイル -->
+<link href="../templates/dt4/css/ypro_common.css?ver=20200519" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 予約ページ（プラン一覧・詳細）、クチコミページ -->
+<link href="../templates/dt4/css/ypro.css?ver=20210826" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 予約ページ（空室カレンダー） -->
+
+
+<!-- 予約ページ／クチコミページ（フォーム） -->
+<link href="../templates/dt4/css/ypro_form.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+<link rel="stylesheet" type="text/css" media="screen, projection, tv, print" href="https://www.okunoyu.com/assets/css/extra_reserve.css" />
+
+<!-- *** javascript *** -->
+<!-- <script src="../templates/dt3/js/jquery.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="../templates/dt4/js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../templates/dt4/js/jquery.lightbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="../templates/dt4/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script src="../templates/dt4/js/include.js?var=20201113" type="text/javascript" charset="utf-8"></script>
+
+<script src="../templates/dt4/js/ypro.lazyfunction.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../templates/dt4/js/thickbox.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../templates/dt4/js/stockcalendar_re.js?ver=20220117" type="text/javascript" charset="utf-8"></script>
+
+<script src="./Scripts/paging.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(function() {
+	$("#ypro_wrapper .inner_photo .thumbs p a img").lazyload({
+		placeholder : "../templates/dt4/images/grey.gif",
+		effect : "fadeIn",
+		threshold : 200
+	});
+	$("#ypro_wrapper .ypro_package").lazylazyfunction({
+		threshold : 200
+	});
+
+//	$('a.lightbox').lightBox();
+
+	$("#ypro_wrapper .ypro_list .ypro_st").hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","default");
+	});
+	$("div.ypro_hidden").css("display","none");
+	$("#ypro_wrapper .ypro_list .ypro_st").click(function(){
+		$(this).next().slideToggle("slow");
+	});
+
+	$("#no_date").click(function(){
+		if(this.checked){
+			$("#s_year").prop('disabled', true);
+			$("#s_month").prop('disabled', true);
+			$("#s_day").prop('disabled', true);
+
+		}else{
+			$("#s_year").prop('disabled', false);
+			$("#s_month").prop('disabled', false);
+			$("#s_day").prop('disabled', false);
+
+		}
+	});
+
+	$('a.lightbox18').lightBox();
+
+	$('a.lightbox19').lightBox();
+
+	$('a.lightbox_room_13').lightBox();
+
+	$('a.lightbox_room_14').lightBox();
+
+	$('a.lightbox_room_9').lightBox();
+
+	$('a.lightbox_room_11').lightBox();
+
+	$('a.lightbox_room_15').lightBox();
+
+	$('a.lightbox_room_10').lightBox();
+
+	$('a.lightbox_room_12').lightBox();
+
+});
+
+function ypro_change_pic( nYproId, nImgNo, sYproThumb, sYproOrg, sYproAlt){
+	var nTmpIndex;
+	var sImgName1;
+	var sImgName2;
+	var sTmpHref;
+	var sTmpTitle;
+	var sNowHref;
+	var sNowTitle;
+	var objImg = document.getElementById( "ypro_canvas_img_" + nYproId );
+	objImg.src = sYproThumb;
+	objImg.title = sYproAlt;
+	objImg.alt = sYproAlt;
+	var objTxt = document.getElementById( "ypro_canvas_txt_" + nYproId );
+	objTxt.innerHTML = sYproAlt;
+	for( var ii=0; ii<8; ii++ ){
+		var objTmpA = document.getElementById( "img_" + nYproId + "_" + ( ii + 1 ) );
+		if( objTmpA != null ){
+			nSIndex = ( objTmpA.href ).lastIndexOf( "/" );
+			sImgName1 = ( objTmpA.href ).substring( nSIndex + 1, ( objTmpA.href ).length );
+			nSIndex = sYproOrg.lastIndexOf( "/" );
+			sImgName2 = sYproOrg.substring( nSIndex + 1, sYproOrg.length );
+			if( sImgName1 == sImgName2 ){
+				sTmpHref = objTmpA.href+"";
+				sTmpTitle = objTmpA.title+"";
+				var objA = document.getElementById( "ypro_canvas_a_" + nYproId );
+//				sNowHref = objA.href+"";
+//				sNowTitle = objA.title+"";
+//				objA.href = sTmpHref;
+				objA.title = sTmpTitle;
+				objA.name = objTmpA.id + "";
+//				objTmpA.href = sNowHref;
+//				objTmpA.title = sNowTitle;
+			}
+		}
+	}
+}
+
+
+window.onload = defaultClass;
+
+function expand(t) {
+    for (var i=0; i<5; i++) {
+        var t = t.parentNode
+
+        if (t.className=='hide') {
+            t.className = 'show';
+            break;
+        } else if (t.className=='show') {
+            t.className = 'hide';
+            break;
+        }
+    }
+}
+
+function defaultClass() {
+    var e = document.getElementsByTagName('*');
+
+    for(var i=0; i<e.length; i++) {
+        if(e[i].getAttribute('class') == 'show' || e[i].getAttribute('className') == 'show') {
+            e[i].className = 'hide';
+        }
+    }
+}
+
+$(document).ready(function() {
+
+
+	$("input.ypro_rk_chk").click(function(event){
+		search_room_by_keyword( "1" );
+		location.hash = "ypro_sb";		
+	});
+
+	search_room_by_keyword( "1" );
+
+	function search_room_by_keyword( sType ){
+
+		var sYproSelect = "";
+		var nYproRkNum = $("input#ypro_rk_num").val();
+		$( ".ypro_rk_all" ).hide();
+		for( var ii=1; ii<=nYproRkNum; ii++ ){
+			if( $("input#ypro_rk_" + ii).is(':checked') ){
+				sYproSelect = sYproSelect + ".ypro_rk_" + $("input#ypro_rk_" + ii).val();
+			}
+		}
+		if( sYproSelect.length > 0 ){
+			$( sYproSelect ).show();
+		}
+		else{
+			$( ".ypro_rk_all" ).show();
+		}
+
+	}
+
+});
+
+function change_search_tab( pore, sUrl ){
+
+	// パラメータが追加されてなかったら追加する
+	if( sUrl.indexOf( "&pore" ) < 0 && pore != "3" ){
+		var nSharpIndex = sUrl.indexOf( "#" );
+		if( nSharpIndex < 0 ){
+			sUrl = sUrl + "&pore=" + pore + "#ypro_sb";
+		}
+		else{
+			var sUrlBefore = sUrl.substring( 0, nSharpIndex );
+			var sUrlAfter = sUrl.substring( nSharpIndex, sUrl.length );
+			sUrl = sUrlBefore + "&pore=" + pore + sUrlAfter;
+		}
+	}
+
+	var objSumit = document.ypro_form_kensaku;
+	if( objSumit != undefined ){
+		objSumit.action = sUrl;
+		objSumit.submit();
+	}
+	else{
+		location.href = sUrl;
+	}
+
+}
+</script>
+
+<script>
+var okunoyu_html = document.getElementsByTagName("html")[0];
+okunoyu_html.setAttribute("lang", "zh-cn");
+</script>
+<script src="https://www.okunoyu.com/assets/js/extra_reserve.js"></script>
+
+
+
+
+
+
+
+
+
+</head>
+
+<body id="ypro_body">
+
+<div class="logo-container">
+    <div class="logo-container-inner">
+        <p class="logo-container__logo"><a href="http://www.okunoyu.com/" title="奥の湯" target="_blank"><img src="https://www5.489pro.com/asp/data/user_data/43000032/files/logo_bk.png" alt="奥の湯"></a></p>
+        <p class="logo-container__top"><a href="https://www5.489pro.com/asp/489/menu.asp?id=43000032&lan=CHT"></a></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+	<div id="ypro_wrapper">
+
+	<!-- ▼施設名（上部）start -->
+	<div class="ypro_yado_name layout_top">
+		<p>旅館　奥の湯</p>
+	</div><!-- /.ypro_yado_name -->
+	<!-- ▲施設名（上部）end -->
+
+	<!-- ▼ログアウト中　start -->
+	<div class="ypro_login_button">
+	<div class="inner bg_logout">
+
+		<p class="btn_refer"><a href="https://www5.489pro.com/asp/489/refer_login.asp?yaid=43000032&lan=CHT">預約之確認</a></p>
+		<p class="btn_change"><a href="https://www5.489pro.com/asp/489/henkou_login.asp?yaid=43000032&lan=CHT">變更預約內容</a></p>
+		<p class="btn_cancel"><a href="https://www5.489pro.com/asp/489/cancel_login.asp?yaid=43000032&lan=CHT">預訂取消</a></p>
+
+		<p class="btn_login"><a href="https://www5.489pro.com/asp/member/index.asp?su=43000032&lan=CHT&lfru=https%3A%2F%2Fwww5%2E489pro%2Ecom%2Fasp%2F489%2Fmenu%2Easp%3Fid%3D43000032%26ty%3Dser%26list%3DYES%26lan%3DCHT">登入</a></p>
+
+	</div>
+	</div><!-- /.ypro_login_button -->
+	<!-- ▲ログアウト中　end -->
+
+<div class="ypro_sub_button layout_top">
+
+</div><!-- ypro_sub_button -->
+<div class="ypro_search_box" id="search_box"><!-- 検索窓の枠 -->
+
+	<div class="ypro_st">
+搜尋空房
+	</div>
+
+	<div class="ypro_search" id="ypro_search">
+
+		<form class="ypro_form_parts" name="ypro_form_kensaku" action="menu.asp?id=43000032&lan=CHT&list=YES&ty=ser&m_menu=1&dt=4" onsubmit="return false;" method="post">
+
+		<input type="hidden" name="obj_search_from" value="1" />
+		<input type="hidden" name="obj_search_form" value="1" />
+		<input type="hidden" name="calendar_only" value="" />
+		<input type="hidden" name="lng" value="4" id="s_lng" />
+
+<input type="hidden" name="child_name_1" value="小学生" id="s_child_name_1" />
+<input type="hidden" name="obj_child_num_1" value="" id="s_child_num_1" />
+
+<input type="hidden" name="child_name_2" value="小児（食事布団あり）" id="s_child_name_2" />
+<input type="hidden" name="obj_child_num_2" value="" id="s_child_num_2" />
+
+<input type="hidden" name="child_name_3" value="小児（食事のみ）" id="s_child_name_3" />
+<input type="hidden" name="obj_child_num_3" value="" id="s_child_num_3" />
+
+<input type="hidden" name="child_name_4" value="小児（布団のみ）" id="s_child_name_4" />
+<input type="hidden" name="obj_child_num_4" value="" id="s_child_num_4" />
+
+<input type="hidden" name="child_name_5" value="小児（食事布団なし）" id="s_child_name_5" />
+<input type="hidden" name="obj_child_num_5" value="" id="s_child_num_5" />
+
+<input type="hidden" name="child_name_6" value="" id="s_child_name_6" />
+<input type="hidden" name="obj_child_num_6" value="" id="s_child_num_6" />
+
+<input type="hidden" name="child_name_7" value="" id="s_child_name_7" />
+<input type="hidden" name="obj_child_num_7" value="" id="s_child_num_7" />
+
+<input type="hidden" name="child_name_8" value="" id="s_child_name_8" />
+<input type="hidden" name="obj_child_num_8" value="" id="s_child_num_8" />
+
+<input type="hidden" name="child_name_9" value="" id="s_child_name_9" />
+<input type="hidden" name="obj_child_num_9" value="" id="s_child_num_9" />
+
+<input type="hidden" name="child_name_10" value="" id="s_child_name_10" />
+<input type="hidden" name="obj_child_num_10" value="" id="s_child_num_10" />
+
+		<table cellspacing="1" cellpadding="0" class="ypro_tbl">
+		<tbody>
+
+		<tr>
+
+			<th>住宿日</th>
+
+			<td>
+
+				<input type="text" name="obj_year" class="size_xs thickbox" alt="../templates/dt2/489/parts/search_block_calendar.html?ver=20210201&TB_iframe=true&height=210&width=550" id="s_year" value="2022" disabled="disabled" /><span class="num_space">年</span>
+				<input type="text" name="obj_month" class="size_xs thickbox" alt="../templates/dt2/489/parts/search_block_calendar.html?ver=20210201&TB_iframe=true&height=210&width=550" id="s_month" value="3" disabled="disabled" /><span class="num_space">月</span>
+				<input type="text" name="obj_day" class="size_xs thickbox" alt="../templates/dt2/489/parts/search_block_calendar.html?ver=20210201&TB_iframe=true&height=210&width=550" id="s_day" value="10" disabled="disabled" />日
+				<p class="date_check"><label><span><input type="checkbox" name="obj_no_date" id="no_date" value="1"  checked="checked"/></span>日期未定</label></p>
+
+			</td>
+		</tr>
+
+		<tr>
+
+			<th>人數、入住夜數、客房數</th>
+
+			<td>
+成人(每1客房)
+
+<select name="obj_per_num" id="s_adult">
+
+<option value="0">未定</option>
+
+<option value="1">1</option>
+
+<option value="2">2</option>
+
+<option value="3">3</option>
+
+<option value="4">4</option>
+
+<option value="5">5</option>
+
+<option value="6">6</option>
+
+<option value="7">7</option>
+
+<option value="8">8</option>
+
+<option value="9">9</option>
+
+<option value="10">10</option>
+
+</select>
+
+<span class="num_space">位</span>
+<select name="obj_stay_num" >
+<option value="0">未定</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select><span class="num_space">晚</span><select name="obj_room_num" >
+<option value="0">未定</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select><span class="num_space">間</span>
+			<input type="hidden" id="search_adult_min_num" value="1"/>
+			<input type="hidden" id="search_adult_max_num" value="10"/>
+			<input type="hidden" id="search_child_min_num" value="1"/>
+			<input type="hidden" id="search_child_max_num" value="10"/>
+			<p class="num_child">兒童<a href="../templates/dt4/489/parts/search_block_child_num.html?ver=20201125&TB_iframe=true&width=600&height=300" class="thickbox"><span id="child_selected_number">0</span></a>位</p>
+
+			</td>
+		</tr>
+
+		<tr>
+
+			<th>每1客房或每1人住宿1晚的價格</th>
+
+			<td class="ypro_last">
+
+<select name="obj_budget_min" >
+
+<option value="0" selected="selected">無下限</option>
+
+<option value="1">5,000日元
+<option value="2">6,000日元
+<option value="3">7,000日元
+<option value="4">8,000日元
+<option value="5">9,000日元
+<option value="6">10,000日元
+<option value="7">12,000日元
+<option value="8">14,000日元
+<option value="9">16,000日元
+<option value="10">18,000日元
+<option value="11">20,000日元
+<option value="12">30,000日元
+<option value="13">40,000日元
+<option value="14">50,000日元
+</select>
+～
+<select name="obj_budget_max" >
+
+<option value="0" selected="selected">無上限</option>
+
+<option value="1">5,000日元
+<option value="2">6,000日元
+<option value="3">7,000日元
+<option value="4">8,000日元
+<option value="5">9,000日元
+<option value="6">10,000日元
+<option value="7">12,000日元
+<option value="8">14,000日元
+<option value="9">16,000日元
+<option value="10">18,000日元
+<option value="11">20,000日元
+<option value="12">30,000日元
+<option value="13">40,000日元
+<option value="14">50,000日元
+</select>
+			</td>
+		</tr>
+
+		</tbody>
+		</table>
+		
+
+		<p class="btn">
+
+		<input type="button" class="input_l" id="ypro_form_kensaku_button" value="顯示此條件下的空房狀況" onclick="removeJpnWord();changeYproId();changeFormAction('00103');document.ypro_form_kensaku.submit();return false;" />
+
+		</p>
+
+		</form>
+	</div><!-- ypro_search -->
+</div><!-- .ypro_search_box -->
+<script type="text/javascript">
+
+	function removeJpnWord(){
+
+		for( var ii=0; ii<10; ii++ ){
+			eval( "document.ypro_form_kensaku.child_name_" + ( ii + 1 ) + ".value='';" );
+		}
+
+	}
+
+	function changeYproId(){
+
+		var objForm = document.ypro_form_kensaku;
+		if( objForm.selected_id != undefined ){
+
+			var sSelectedId = objForm.selected_id.options[ objForm.selected_id.selectedIndex ];
+			if( sSelectedId != undefined && sSelectedId.value != undefined ){
+
+				objForm.action = objForm.action.replace( /id=\d+/, "id=" + sSelectedId.value );
+
+			}
+
+		}
+
+	}
+	
+	function changeFormAction(kumiId) {
+		var objForm = document.ypro_form_kensaku;
+		if ( kumiId == "00103" && objForm.selected_id != undefined ){
+
+			var sSelectedId = objForm.selected_id.options[ objForm.selected_id.selectedIndex ];
+			if ( sSelectedId != undefined && sSelectedId.value != undefined ) {
+				if ( sSelectedId.value.length != 8 ) {
+					objForm.area_yado_id.value = sSelectedId.value;
+					objForm.action = "../g/c/calendar.asp?kid=" + kumiId + "&lan=CHT";
+				} else {
+					if ( sSelectedId.value != "43000032" ) {
+						objForm.action = objForm.action.replace(new RegExp("&plan=[\\d+,?]+","g"),"");
+					}
+				}
+			}
+
+		}
+	}
+
+</script>
+
+<div class="ypro_list ypro_package_list" id="y_planlist">
+	<p class="ypro_st"><span class="ic_close">方案一覽</span></p>
+
+	<div class="box" style="display:none;">
+
+
+	<p class="ypro_rk_all "><a href="#18">1晚/ 2餐【含晚餐 - 含早餐】</a></p>
+
+	<p class="ypro_rk_all "><a href="#19">半夜住宿【不含晚餐·含早餐】</a></p>
+
+	</div>
+</div>
+
+<a name="ypro_sb" id="ypro_sb"></a>
+
+	<ul class="ypro_wrp_tab_button">
+
+	<li class="tab_package active"><a href="javascript:void(0);" onclick="change_search_tab( '3', './menu.asp?id=43000032&lan=CHT&list=YES&ty=ser&m_menu=1&dt=4#ypro_sb' );return false;">從方案尋找</a></li>
+
+	<li class="tab_room"><a href="javascript:void(0);" onclick="change_search_tab( '3', './menu.asp?id=43000032&fn=room&lan=CHT&list=YES&ty=ser&m_menu=1&dt=4#ypro_sb' );return false;">從房型尋找</a></li>
+
+	<li class="tab_sort_button">
+	<div class="ypro_sort_button layout_top">
+<p class="btn_recom active">推薦順序</p><p class="btn_low"><a href="javascript:void(0);" onClick="searchprice(1);return false;">價格由低至高</a></p><p class="btn_high"><a href="javascript:void(0);" onClick="searchprice(2);return false;">價格由高至低</a></p>
+	</div>
+	</li>
+	</ul>
+	<div class="ypro_wrp_tab_space"></div>
+	<a name="18" class=""></a>
+	<div class="ypro_package " id="ypro_plan_box_18">
+		<div class="ypro_st">
+			1晚/ 2餐【含晚餐 - 含早餐】
+		</div><!-- /.ypro_st -->
+
+		<div class="box_pac">
+			<div class="inner_intro">
+
+				<div class="intro">
+
+					<div class="txt">
+					半食宿一晚<br />
+（含晚餐&middot;含早餐）<br />
+餐饮/餐厅<br />
+它是时尚或日式风格。<br />
+（※不可选择）
+					</div>
+
+					<div class="txt" style="display:none;">
+					公共浴室&middot;混合沐浴户外浴缸&middot;家庭浴<br />
+一切都可以使用。<br />
+※家庭浴<br />
+我无法预约。 先到先得。
+					</div>
+					
+					<p class="ypro_btn_readmore">
+						<a href="javascript:void(0);" class="ypro_btn_style btn_default">了解更多</a>
+					</p>
+
+				</div><!-- intro -->
+
+				<table class="ypro_tbl">
+
+				<tr>
+					<th>登記入住</th>
+					<td>15點00分～18點00分</td>
+				</tr>
+
+				<tr>
+					<th>辦理退房</th>
+					<td>10點00分以前</td>
+				</tr>
+
+				<tr>
+					<th>餐點</th>
+					<td>早餐
+・晚餐
+</td>
+				</tr>
+
+				<tr>
+					<th>餐點介紹</th>
+					<td>
+						<div class="txt">
+						一顿饭<br />
+风格（椅子桌）或日式（Zashiki /榻榻米）<br />
+※无法选择<br />
+※不是私人房间
+						</div>
+
+					</td>
+				</tr>
+
+				<tr>
+					<th>價格</th>
+					<td>16,500日元～(成人2人利用時的金額，每1客房每1位的金額)
+					<br />※價格為含消費税的金額。</td>
+				</tr>
+
+				<tr>
+					<th>截止受理預約</th>
+
+					<td>住宿日當天的12點為止</td>
+
+				</tr>
+
+				<tr>
+					<th>方案實施期間</th>
+					<td>2019年2月23日～2022年9月30日</td>
+				</tr>
+
+				<tr>
+
+					<th>方案介紹</th>
+
+					<td>
+						<div class="txt">
+						客房只有室内游泳池<br />
+15：00~21：00<br />
+※带泳装<br />
+<br />
+家庭浴<br />
+它无法保留指定的时间。<br />
+先到先得。<br />
+15：00~23：00<br />
+7：00~9：00<br />
+※白天不能用于清洁。
+						</div>
+
+						<div class="txt" style="display:none;">
+						混合沐浴户外浴<br />
+它24小时开放。<br />
+※20：00~22：00<br />
+我有时间只为女性。 （男人不在）<br />
+<br />
+到了连续的夜晚<br />
+周一/周五<br />
+清洁时，温泉不能在9：30-15：00之前使用。<br />
+请在白天享受其他温泉。
+						</div>
+						
+						<p class="ypro_btn_readmore_tbl">
+							<a href="javascript:void(0);" class="ypro_btn_style btn_default">了解更多</a>
+						</p>
+
+					</td>
+				</tr>
+
+	<!--
+	<tr>
+	<td colspan="2" class="bodr_05">
+
+		<form action="date.asp?id=43000032&room=13&plan=18&user_num=0&lan=CHT&list=YES&ty=ser&m_menu=1&dt=4" method="post">
+		<input type="submit" value="前往方案詳細資訊與空房狀況" />
+		</form>
+
+	</td>
+	</tr>
+	-->
+
+				</table>
+
+			</div><!-- /.inner_intro -->
+
+			<div class="inner_photo">
+
+
+				<div class="photo">
+					<a name="img_18_1" title="" id="ypro_canvas_a_18" onclick="$('#' + this.name).trigger('click');return false;" href="javascript:void(0);">
+					<img src="../data/user_data/43000032/image_20190120093703_8.jpg" width="320" alt="" title="" id="ypro_canvas_img_18" class="ypro_image" />
+					</a>
+				</div>
+
+				<div class="txt" id="ypro_canvas_txt_18">
+				
+				</div>
+
+			<div class="thumbs">
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093703_8.jpg" class="lightbox18" id="img_18_1" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093703_8_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 1, '../data/user_data/43000032/image_20190120093703_8.jpg', '../data/user_data/43000032/image_20190120093703_8.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093702_2.jpg" class="lightbox18" id="img_18_2" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093702_2_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 2, '../data/user_data/43000032/image_20190120093702_2.jpg', '../data/user_data/43000032/image_20190120093702_2.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120103550_5.jpg" class="lightbox18" id="img_18_3" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120103550_5_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 3, '../data/user_data/43000032/image_20190120103550_5.jpg', '../data/user_data/43000032/image_20190120103550_5.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190908114206_2.jpg" class="lightbox18" id="img_18_4" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190908114206_2_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 4, '../data/user_data/43000032/image_20190908114206_2.jpg', '../data/user_data/43000032/image_20190908114206_2.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+			</div>
+
+			<div class="thumbs">
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093216_9.jpg" class="lightbox18" id="img_18_5" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093216_9_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 5, '../data/user_data/43000032/image_20190120093216_9.jpg', '../data/user_data/43000032/image_20190120093216_9.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190930183832_1.jpg" class="lightbox18" id="img_18_6" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190930183832_1_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 6, '../data/user_data/43000032/image_20190930183832_1.jpg', '../data/user_data/43000032/image_20190930183832_1.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120104427_1.jpg" class="lightbox18" id="img_18_7" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120104427_1_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 7, '../data/user_data/43000032/image_20190120104427_1.jpg', '../data/user_data/43000032/image_20190120104427_1.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120104428_7.jpg" class="lightbox18" id="img_18_8" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120104428_7_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 18, 8, '../data/user_data/43000032/image_20190120104428_7.jpg', '../data/user_data/43000032/image_20190120104428_7.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+			</div>
+
+			</div><!-- /.inner_photo -->
+
+		</div><!-- /.box_pac -->
+
+		<div class="box_calendar" id="stock_calendar_1">
+		</div><!-- /.box_calendar  -->
+
+
+	</div><!-- /.ypro_package -->
+
+
+	<p class="ypro_ptop_button ">
+		<a href="#ypro_wrapper"><i class="ic" aria-hidden="true"></i>前往頁面頂端</a>
+	</p>
+
+	<script type="text/javascript">
+
+		setYproLazyFunction( 'ypro_plan_box_18', 'initStockCalendarRe( "43000032", null, 18, null, "2022/3/9", "2022/3/15", "id=stock_calendar_1%2Cstart_date=2022/3/9%2Cend_date=2022/3/15%2Cselect_room=%2Cselect_plan=18%2Cuser_num=2%2Cinit_flag=1%2Cdisp_cal_room=1%2Cdisp_cal_plan=%2Cdisp_cal_plan_btn=1%2Cinit_plan_num=%2Ckid=%2Clan_no=4%2Ckaiin_f=1%2Cmo=0%2Cuid=%2Cmeo=%2Clmg=%2Cprv=%2Chaku_num=0%2Cheya_num=0%2Clist=1%2Cty=ser", "&amp;s_y=2022&amp;s_m=3&amp;s_d=10&amp;s_nd=1&amp;s_n=0&amp;s_r=0&amp;s_bmin=&amp;s_bmax=&amp;s_sm=&amp;plan_type=-1&amp;men=&amp;women=&amp;nights=&amp;dayon=&amp;first=&amp;early=&amp;long=&amp;meal=-1&amp;payment=0" ,"","","","","","YES","","","","","","0","日元","0","○,間,×,-,準備中,詢問,×,,等待空缺","0","3","","-1","","","","","","","","-1","0","1", "0","","","1","0","1","1","")' );
+
+	</script>	<a name="19" class=""></a>
+	<div class="ypro_package " id="ypro_plan_box_19">
+		<div class="ypro_st">
+			半夜住宿【不含晚餐·含早餐】
+		</div><!-- /.ypro_st -->
+
+		<div class="box_pac">
+			<div class="inner_intro">
+
+				<div class="intro">
+
+					<div class="txt">
+					1晚用餐【早餐不含晚餐】<br />
+☆最后一刻办理登机手续<br />
+※晚餐加入仅提前预订。<br />
+它不能在当天预订。<br />
+有时甚至前一天我们也无法回应。<br />
+请承认。
+					</div>
+
+					<div class="txt" style="display:none;">
+					■信息■<br />
+&middot;包含一晚住宿（※晚餐不包括在内）<br />
+&middot;早餐是在用餐。<br />
+&middot;请在21点前办理登机手续。<br />
+&middot;如果您过敏或虚弱，请告诉我们。<br />
+&middot;如果您迟到，请联系。<br />
+<br />
+从旅馆步行约15分钟到温泉镇。<br />
+Spa镇设有2至5间餐厅。<br />
+我建议你去检查一下（* ^ _ ^ *）
+					</div>
+					
+					<p class="ypro_btn_readmore">
+						<a href="javascript:void(0);" class="ypro_btn_style btn_default">了解更多</a>
+					</p>
+
+				</div><!-- intro -->
+
+				<table class="ypro_tbl">
+
+				<tr>
+					<th>登記入住</th>
+					<td>15點00分～18點00分</td>
+				</tr>
+
+				<tr>
+					<th>辦理退房</th>
+					<td>10點00分以前</td>
+				</tr>
+
+				<tr>
+					<th>餐點</th>
+					<td>早餐
+</td>
+				</tr>
+
+				<tr>
+					<th>餐點介紹</th>
+					<td>
+						<div class="txt">
+						<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">一顿饭</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">风格（椅子桌）或日式（Zashiki /榻榻米）</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">※无法选择</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">※不是私人房间</span>
+						</div>
+
+						<div class="txt" style="display:none;">
+						请小心。 黑川温泉的夜晚很少有餐厅。
+						</div>
+						
+						<p class="ypro_btn_readmore_tbl">
+							<a href="javascript:void(0);" class="ypro_btn_style btn_default">了解更多</a>
+						</p>
+
+					</td>
+				</tr>
+
+				<tr>
+					<th>價格</th>
+					<td>11,550日元～(成人2人利用時的金額，每1客房每1位的金額)
+					<br />※價格為含消費税的金額。</td>
+				</tr>
+
+				<tr>
+					<th>截止受理預約</th>
+
+					<td>住宿日當天的12點為止</td>
+
+				</tr>
+
+				<tr>
+					<th>方案實施期間</th>
+					<td>2019年2月23日～2022年9月30日</td>
+				</tr>
+
+				<tr>
+
+					<th>方案介紹</th>
+
+					<td>
+						<div class="txt">
+						<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">客房只有室内游泳池</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">15：00~21：00</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">※带泳装</span><br />
+<br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">家庭浴</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">它无法保留指定的时间。</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">先到先得。</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">15：00~23：00</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">7：00~9：00</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">※白天不能用于清洁。</span>
+						</div>
+
+						<div class="txt" style="display:none;">
+						<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">混合沐浴户外浴</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">它24小时开放。</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">※20：00~22：00</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">我有时间只为女性。 （男人不在）</span><br />
+<br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">到了连续的夜晚</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">周一/周五</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">清洁时，温泉不能在9：30-15：00之前使用。</span><br />
+<span style="background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); font-size:13px">请在白天享受其他温泉。</span>
+						</div>
+						
+						<p class="ypro_btn_readmore_tbl">
+							<a href="javascript:void(0);" class="ypro_btn_style btn_default">了解更多</a>
+						</p>
+
+					</td>
+				</tr>
+
+	<!--
+	<tr>
+	<td colspan="2" class="bodr_05">
+
+		<form action="date.asp?id=43000032&room=13&plan=19&user_num=0&lan=CHT&list=YES&ty=ser&m_menu=1&dt=4" method="post">
+		<input type="submit" value="前往方案詳細資訊與空房狀況" />
+		</form>
+
+	</td>
+	</tr>
+	-->
+
+				</table>
+
+			</div><!-- /.inner_intro -->
+
+			<div class="inner_photo">
+
+
+				<div class="photo">
+					<a name="img_19_1" title="" id="ypro_canvas_a_19" onclick="$('#' + this.name).trigger('click');return false;" href="javascript:void(0);">
+					<img src="../data/user_data/43000032/image_20190120103950_2.jpg" width="320" alt="" title="" id="ypro_canvas_img_19" class="ypro_image" />
+					</a>
+				</div>
+
+				<div class="txt" id="ypro_canvas_txt_19">
+				
+				</div>
+
+			<div class="thumbs">
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120103950_2.jpg" class="lightbox19" id="img_19_1" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120103950_2_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 1, '../data/user_data/43000032/image_20190120103950_2.jpg', '../data/user_data/43000032/image_20190120103950_2.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120103950_1.jpg" class="lightbox19" id="img_19_2" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120103950_1_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 2, '../data/user_data/43000032/image_20190120103950_1.jpg', '../data/user_data/43000032/image_20190120103950_1.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120103951_3.jpg" class="lightbox19" id="img_19_3" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120103951_3_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 3, '../data/user_data/43000032/image_20190120103951_3.jpg', '../data/user_data/43000032/image_20190120103951_3.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120104024_1.jpg" class="lightbox19" id="img_19_4" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120104024_1_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 4, '../data/user_data/43000032/image_20190120104024_1.jpg', '../data/user_data/43000032/image_20190120104024_1.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+			</div>
+
+			<div class="thumbs">
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093703_5.jpg" class="lightbox19" id="img_19_5" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093703_5_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 5, '../data/user_data/43000032/image_20190120093703_5.jpg', '../data/user_data/43000032/image_20190120093703_5.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093702_1.jpg" class="lightbox19" id="img_19_6" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093702_1_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 6, '../data/user_data/43000032/image_20190120093702_1.jpg', '../data/user_data/43000032/image_20190120093702_1.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190120093703_9.jpg" class="lightbox19" id="img_19_7" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190120093703_9_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 7, '../data/user_data/43000032/image_20190120093703_9.jpg', '../data/user_data/43000032/image_20190120093703_9.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+				<p>
+					<a href="../data/user_data/43000032/image_20190629193847_2.jpg" class="lightbox19" id="img_19_8" title="">
+
+						<img src="../data/user_data/43000032/small/image_20190629193847_2_s.jpg" alt="" title="" onmouseover="ypro_change_pic( 19, 8, '../data/user_data/43000032/image_20190629193847_2.jpg', '../data/user_data/43000032/image_20190629193847_2.jpg', '' )" class="ypro_image" />
+
+					</a>
+				</p>
+
+			</div>
+
+			</div><!-- /.inner_photo -->
+
+		</div><!-- /.box_pac -->
+
+		<div class="box_calendar" id="stock_calendar_2">
+		</div><!-- /.box_calendar  -->
+
+
+	</div><!-- /.ypro_package -->
+
+
+	<script type="text/javascript">
+
+		setYproLazyFunction( 'ypro_plan_box_19', 'initStockCalendarRe( "43000032", null, 19, null, "2022/3/9", "2022/3/15", "id=stock_calendar_2%2Cstart_date=2022/3/9%2Cend_date=2022/3/15%2Cselect_room=%2Cselect_plan=19%2Cuser_num=2%2Cinit_flag=1%2Cdisp_cal_room=1%2Cdisp_cal_plan=%2Cdisp_cal_plan_btn=1%2Cinit_plan_num=%2Ckid=%2Clan_no=4%2Ckaiin_f=1%2Cmo=0%2Cuid=%2Cmeo=%2Clmg=%2Cprv=%2Chaku_num=0%2Cheya_num=0%2Clist=1%2Cty=ser", "&amp;s_y=2022&amp;s_m=3&amp;s_d=10&amp;s_nd=1&amp;s_n=0&amp;s_r=0&amp;s_bmin=&amp;s_bmax=&amp;s_sm=&amp;plan_type=-1&amp;men=&amp;women=&amp;nights=&amp;dayon=&amp;first=&amp;early=&amp;long=&amp;meal=-1&amp;payment=0" ,"","","","","","YES","","","","","","0","日元","0","○,間,×,-,準備中,詢問,×,,等待空缺","0","3","","-1","","","","","","","","-1","0","1", "0","","","1","0","1","1","")' );
+
+	</script>
+<a name="ypro_sb" id="ypro_sb"></a>
+
+	<div class="ypro_sort_button layout_top">
+<p class="btn_recom active">推薦順序</p><p class="btn_low"><a href="javascript:void(0);" onClick="searchprice(1);return false;">價格由低至高</a></p><p class="btn_high"><a href="javascript:void(0);" onClick="searchprice(2);return false;">價格由高至低</a></p>
+	</div>
+<div class="ypro_sub_button layout_bottom">
+
+</div><!-- /under_button -->
+</div><!-- wrapper -->
+
+<div id="okunoyu_footer" class="footer"></div>
+
+
+
+
+
+
+<script src="../templates/dt4/js/tooltip.script.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+function searchprice(pore){
+
+	// 検索窓のフォーム
+	var objForm = document.ypro_form_kensaku;
+
+	// 検索窓があったら
+	if( objForm != undefined ){
+
+		// 検索窓のフォームに定義されているURL
+		var sUrl = objForm.action;
+
+		// パラメータが追加されてなかったら追加する
+		if( sUrl.indexOf( "&pore" ) < 0 && pore != 3 ){
+			var nSharpIndex = sUrl.indexOf( "#" );
+			if( nSharpIndex < 0 ){
+				sUrl = sUrl + "&pore=" + pore + "#ypro_sb";
+			}
+			else{
+				var sUrlBefore = sUrl.substring( 0, nSharpIndex );
+				var sUrlAfter = sUrl.substring( nSharpIndex, sUrl.length );
+				sUrl = sUrlBefore + "&pore=" + pore + sUrlAfter;
+			}
+		}
+
+		// 加工したURLをセットする
+		document.ypro_form_kensaku.action = sUrl;
+
+		// 検索窓から実行
+		document.ypro_form_kensaku.submit();
+
+	}
+
+}
+</script>
+<script type="text/javascript">
+
+</script>
+
+<form name="ypro_to_date" action="menu.asp?id=43000032&lan=CHT&list=YES&ty=ser&m_menu=1" method="post">
+
+<input type="hidden" name="calendar_only" value="" />
+<input type="hidden" name="lng" value="4" id="s_lng" />
+
+<input type="hidden" name="child_name_1" value="小学生" />
+<input type="hidden" name="obj_child_num_1" value="" />
+
+<input type="hidden" name="child_name_2" value="小児（食事布団あり）" />
+<input type="hidden" name="obj_child_num_2" value="" />
+
+<input type="hidden" name="child_name_3" value="小児（食事のみ）" />
+<input type="hidden" name="obj_child_num_3" value="" />
+
+<input type="hidden" name="child_name_4" value="小児（布団のみ）" />
+<input type="hidden" name="obj_child_num_4" value="" />
+
+<input type="hidden" name="child_name_5" value="小児（食事布団なし）" />
+<input type="hidden" name="obj_child_num_5" value="" />
+
+<input type="hidden" name="child_name_6" value="" />
+<input type="hidden" name="obj_child_num_6" value="" />
+
+<input type="hidden" name="child_name_7" value="" />
+<input type="hidden" name="obj_child_num_7" value="" />
+
+<input type="hidden" name="child_name_8" value="" />
+<input type="hidden" name="obj_child_num_8" value="" />
+
+<input type="hidden" name="child_name_9" value="" />
+<input type="hidden" name="obj_child_num_9" value="" />
+
+<input type="hidden" name="child_name_10" value="" />
+<input type="hidden" name="obj_child_num_10" value="" />
+
+<input type="hidden" name="obj_year" value="2022" disabled="disabled" />
+<input type="hidden" name="obj_month" value="" disabled="disabled" />
+<input type="hidden" name="obj_day" value="" disabled="disabled" />
+
+<input type="hidden" name="obj_no_date" value="1"/>
+
+<input type="hidden" name="obj_per_num" value="0" />
+
+<input type="hidden" name="obj_stay_num" value="0" />
+
+<input type="hidden" name="obj_room_num" value="0" />
+
+
+<input type="hidden" name="obj_budget_min" value="" />
+<input type="hidden" name="obj_budget_max" value="" />
+
+</form>
+<script type="text/javascript">
+
+	function linkYproMenu( pore, url ){
+
+		if( document.ypro_to_date.pore == undefined ){
+			var element = document.createElement( "input" );
+			element.name = "pore";
+			element.type = "hidden";
+			element.value = pore;
+			document.ypro_to_date.appendChild( element );
+		}
+
+		document.ypro_to_date.action = url;
+		document.ypro_to_date.submit();
+
+	}
+
+</script>
+</body>
+<script type="text/javascript">
+$(".ypro_btn_readmore").click(function () {
+	yproReadmoreToggle( $(this) );
+});
+$(".ypro_btn_readmore_tbl").click(function () {
+	yproReadmoreTblToggle( $(this) );
+});
+
+function yproReadmoreToggle( objThis ){
+
+	if( objThis.hasClass( "ypro_btn_readmore_close" ) ){
+		objThis.prev().slideUp( "fast" );
+		objThis.addClass( "ypro_btn_readmore" );
+		objThis.removeClass( "ypro_btn_readmore_close" );
+		objThis.children("a").html( "了解更多" );
+	}
+	else{
+		objThis.prev().slideDown( "fast" );
+		objThis.addClass( "ypro_btn_readmore_close" );
+		objThis.removeClass( "ypro_btn_readmore" );
+		objThis.children("a").html( "關閉" );
+	}
+}
+
+function yproReadmoreTblToggle( objThis ){
+
+	if( objThis.hasClass( "ypro_btn_readmore_tbl_close" ) ){
+		objThis.prev().slideUp( "fast" );
+		objThis.addClass( "ypro_btn_readmore_tbl" );
+		objThis.removeClass( "ypro_btn_readmore_tbl_close" );
+		objThis.children("a").html( "了解更多" );
+	}
+	else{
+		objThis.prev().slideDown( "fast" );
+		objThis.addClass( "ypro_btn_readmore_tbl_close" );
+		objThis.removeClass( "ypro_btn_readmore_tbl" );
+		objThis.children("a").html( "關閉" );
+	}
+}
+
+</script>
+</html>

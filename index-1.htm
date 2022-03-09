@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name=”keywords” content="FONTPLUS, ためし書き, Webフォント" />
+  <meta name=description content="「Webフォント・サービス FONTPLUS ためし書き」は、FONTPLUSが提供する豊富なWebフォントを「選んで」「変えて」「共有して」と、無料であれこれ試せるサービスです。" />
+  <title>Webフォント・サービス FONTPLUS ｜ ためし書き</title>
+  <meta property="og:title" content="Webフォント・サービス FONTPLUS ｜ ためし書き" />
+  <meta property="og:description" content="「Webフォント・サービス FONTPLUS ためし書き」は、FONTPLUSが提供する豊富なWebフォントを「選んで」「変えて」「共有して」と、無料であれこれ試せるサービスです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fontplus.jp/" />
+  <meta property="og:image" content="https://fontplus.jp/tester/ogp.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+  <style>
+    @font-face {
+      font-family: 'fp-hiragino-ud-kaku-w6';
+      font-weight: Bold;
+      src: url('/tester/fonts/fp-hiragino-ud-kaku-w6.woff') format('woff');
+    }
+
+    #loading {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #fff;
+      transition-property: background-color;
+      transition-duration: 1.2s;
+      transition-timing-function: cubic-bezier(0.43, 0.16, 0.4, 0.99);
+    }
+
+    #loading.fadeOut {
+      opacity: 0;
+      visibility: hidden;
+      transition-property: opacity, visibility;
+      transition-duration: 0.8s;
+      transition-timing-function: cubic-bezier(0.43, 0.16, 0.4, 0.99);
+      transition-delay: 0.6s;
+    }
+
+    .container {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 64px;
+      pointer-events: none;
+    }
+
+    .logo {
+      margin-left: 30px;
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    .underline {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -22px;
+      display: none;
+      content: "";
+      height: 2px;
+      background-color: #222;
+      pointer-events: none;
+    }
+
+    .menus {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      margin-left: auto;
+      list-style: none;
+      pointer-events: auto;
+    }
+
+    .menus > li {
+      padding-top: 1px;
+      margin: 0 12px;
+      font-family: "fp-hiragino-ud-kaku-w6", "FP-ヒラギノUD角ゴF StdN W6";
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menus > li > a {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #222;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .menus > li > a {
+      line-height: 16px;
+    }
+
+    .menus > li > a:hover .underline {
+      display: block;
+    }
+
+    .menus > .user {
+      position: relative;
+      padding-top: 0;
+      margin: 0 16px 0 36px;
+    }
+
+    .menus > .user a {
+      color: #222;
+    }
+
+    .accountButton {
+      position: relative;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+    }
+
+    .accountButton a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-decoration: none;
+    }
+
+    @keyframes breathing {
+      0% {
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    #unsupported {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: none;
+      background-color: #fff;
+    }
+
+    .unsupported {
+      position: absolute;
+      z-index: 10000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+    }
+
+    .unsupportedBody {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .introduction {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 64px 48px;
+      margin: auto;
+    }
+
+    .heading {
+      text-align: center;
+    }
+
+    .heading h1 {
+      margin: 0;
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: 1.6px;
+      color: #222;
+      font-feature-settings: "palt";
+    }
+
+    .heading p {
+      padding: 64px 0;
+      margin: 0;
+      font-size: 16px;
+      line-height: 2;
+      color: #222;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 32px;
+    }
+
+    .buttons > *:last-child {
+      margin-left: 40px;
+    }
+
+    .button {
+      position: relative;
+      width: 234px;
+      height: 64px;
+    }
+
+    .button .icon {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      color: #aaaaaa;
+    }
+
+    .buttonInner {
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 48px;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: transparent;
+      color: #222;
+      font-size: 16px;
+      text-decoration: none;
+      white-space: nowrap;
+      vertical-align: middle;
+      outline: none;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .buttonInner:hover {
+      background-color: rgba(34, 34, 34, 0.15);
+    }
+    .buttonInner:focus {
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .progress {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #000;
+      transition: width 1s ease, opacity 0.6s ease 0.2s;
+      will-change: width, opacity;
+    }
+
+    .percent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 16px);
+      font-family: "fp-hiragino-ud-kaku-w6", "FP-ヒラギノUD角ゴF StdN W6";
+      font-size: 13px;
+      transition: opacity 0.4s ease;
+      will-change: opacity;
+    }
+
+    .fadeOut .progress,
+    .fadeOut .percent {
+      opacity: 0;
+    }
+
+  </style>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86219318-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-86219318-1');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WSCZLSM');</script>
+  <!-- End Google Tag Manager -->
+<link href="/tester/stylesheets/0.css" rel="stylesheet"><link href="/tester/stylesheets/app.css" rel="stylesheet"></head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSCZLSM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div id="loading">
+    <div class="container" style="top: 32px;">
+      <div class="logo">
+        <svg height="22" viewbox="0 0 8 22" width="8" fill="#222222">
+        <title>FONTPLUS</title>
+        <polygon id="logo" points="2.66470549 -3.56577745e-05 2.66470549 15.996042 0 15.996042 0 18.6625304 2.66470549 18.6625304 2.66470549 21.3297319 5.33155044 21.3297319 5.33155044 18.6625304 7.99982171 18.6625304 7.99982171 15.996042 5.33155044 15.996042 5.33155044 7.99443739 7.99982171 7.99443739 7.99982171 5.32687928 5.33155044 5.32687928 5.33155044 2.6603909 7.99982171 2.6603909 7.99982171 -3.56577745e-05"></polygon></svg>
+      </div>
+      <ul class="menus">
+        <li>
+          <a href="/service" rel="noopener" target="_blank">サービス概要<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="/font-list" rel="noopener" target="_blank">フォントカタログ<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="/usage" rel="noopener" target="_blank">使いかた<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="/faq" rel="noopener" target="_blank">FAQ<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="/info" rel="noopener" target="_blank">お知らせ<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="/featured/font-ranking" rel="noopener" target="_blank">フォントランキング<span class="underline"></span></a>
+        </li>
+        <li>
+          <a href="https://gallery.fontplus.jp/" rel="noopener" target="_blank">ギャラリー<span class="underline"></span></a>
+        </li>
+        <li class="user">
+          <div class="accountButton" role="button">
+            <a href="/users/login" rel="noopener" target="_blank">
+              <span aria-hidden="true" class="material-icons">account_circle</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="progress"></div>
+    <div class="percent">0%</div>
+  </div>
+  <div id="unsupported">
+    <div class="unsupportedBody">
+      <div class="container">
+        <div class="logo">
+          <svg height="22" viewbox="0 0 8 22" width="8" fill="#222222">
+          <title>FONTPLUS</title>
+          <polygon id="logo" points="2.66470549 -3.56577745e-05 2.66470549 15.996042 0 15.996042 0 18.6625304 2.66470549 18.6625304 2.66470549 21.3297319 5.33155044 21.3297319 5.33155044 18.6625304 7.99982171 18.6625304 7.99982171 15.996042 5.33155044 15.996042 5.33155044 7.99443739 7.99982171 7.99443739 7.99982171 5.32687928 5.33155044 5.32687928 5.33155044 2.6603909 7.99982171 2.6603909 7.99982171 -3.56577745e-05"></polygon></svg>
+        </div>
+        <ul class="menus">
+          <li>
+            <a href="/service" rel="noopener" target="_blank">サービス概要<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="/font-list" rel="noopener" target="_blank">フォントカタログ<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="/usage" rel="noopener" target="_blank">使いかた<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="/faq" rel="noopener" target="_blank">FAQ<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="/info" rel="noopener" target="_blank">お知らせ<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="/featured/font-ranking" rel="noopener" target="_blank">フォントランキング<span class="underline"></span></a>
+          </li>
+          <li>
+            <a href="https://gallery.fontplus.jp/" rel="noopener" target="_blank">ギャラリー<span class="underline"></span></a>
+          </li>
+          <li class="user">
+            <div class="accountButton" role="button">
+              <a href="/users/login" rel="noopener" target="_blank">
+                <span aria-hidden="true" class="material-icons">account_circle</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="introduction">
+        <div class="heading">
+          <h1>
+            お使いのブラウザではご覧いただけません
+          </h1>
+          <p>
+            お手数ですが、最新の対応ブラウザ（Chrome／Edge／Firefox／Safari）にて再度ご覧ください。
+          </p>
+        </div>
+
+        <div class="buttons">
+          <div role="button" tabIndex="0" class="button serviceButton">
+            <a href="/service" class="buttonInner">
+              サービス概要
+              <span class="material-icons icon" aria-hidden="true">navigate_next</span>
+            </a>
+          </div>
+
+          <div role="button" tabIndex="0" class="button catalogueButton">
+            <a href="/font-list" class="buttonInner">
+              フォントカタログ
+              <span class="material-icons icon" aria-hidden="true">navigate_next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="app"></div>
+
+  <script>
+    var req = new XMLHttpRequest();
+    var progress = document.querySelector('.progress');
+    var percent = document.querySelector('.percent');
+    var i = 0;
+
+    setInterval(function() {
+      i++;
+      if (i > 92) {
+        clearInterval();
+      } else {
+        progress.style.width =  i + "%";
+        percent.innerText =  i + "%";
+      }
+    }, Math.floor(Math.random() * 30));
+
+    req.onloadend = function (e) {
+      clearInterval();
+      progress.style.width = "100%";
+    }
+  </script>
+
+  <!-- Sibulla tracking code start -->
+  <script type="text/javascript"><!--
+  (function(){ var b = document.getElementsByTagName('script')[0],sib = document.createElement('script');
+  sib.type = 'text/javascript';sib.async = true;
+  sib.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'wv004.sibulla.com/dekatag/access?id=22rGzcMf';
+  b.parentNode.insertBefore(sib,b);}());
+  //--></script>
+  <!-- /Sibulla tracking code end -->
+<script type="text/javascript" src="/tester/javascripts/vendor.js"></script><script type="text/javascript" src="/tester/javascripts/initial.js"></script><script type="text/javascript" src="/tester/javascripts/app.js"></script></body>
+</html>

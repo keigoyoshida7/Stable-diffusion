@@ -1,0 +1,314 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="keywords" content="黒川、黒川温泉、温泉、阿蘇、旅館、南小国町、川風呂、源泉かけ流し、２４時間温泉、立ち寄り湯" />
+<meta name="description" content="" />
+
+<title>旅館　奥の湯 | 予約カレンダー画面</title>
+
+			<link rel="shortcut icon" href="/asp/data/user_data/43000032/favicon.ico" type="image/vnd.microsoft.icon"/>
+
+			<link rel="apple-touch-icon-precomposed" href="https://www5.489pro.com/asp/data/user_data/43000032/webclipicon.png" />
+
+<link href="../templates/dt4/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../templates/dt4/css/jquery.lightbox.css" rel="stylesheet" type="text/css" media="all" />
+
+<link href="../templates/dt4/css/thickbox.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 共通スタイル -->
+<link href="../templates/dt4/css/ypro_common.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 予約ページ（プラン一覧・詳細）、クチコミページ -->
+<link href="../templates/dt4/css/ypro.css?ver=20210826" rel="stylesheet" type="text/css" media="all" />
+
+<!-- 予約ページ／クチコミページ（フォーム） -->
+<link href="../templates/dt4/css/ypro_form.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<link rel="stylesheet" type="text/css" media="screen, projection, tv, print" href="https://www.okunoyu.com/assets/css/extra_reserve.css" />
+
+<!-- *** javascript *** -->
+<!-- <script src="../templates/dt3/js/jquery.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="../templates/dt4/js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../templates/dt4/js/jquery.lightbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="../templates/dt4/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../templates/dt4/js/ypro.lazyfunction.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#ypro_wrapper .inner_photo .thumbs p a img").lazyload({
+		placeholder : "../templates/dt4/images/grey.gif",
+		effect : "fadeIn",
+		threshold : 200
+	});
+	$("#ypro_wrapper .ypro_package").lazylazyfunction({
+		threshold : 200
+	});
+
+	$('a.lightbox').lightBox();
+	$('a.lightbox_r').lightBox();
+
+	$("#ypro_wrapper .ypro_list .ypro_st").hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","default");
+	});
+	$("div.ypro_hidden").css("display","none");
+	$("#ypro_wrapper .ypro_list .ypro_st").click(function(){
+		$(this).next().slideToggle("slow");
+	});
+
+	$("#no_date").click(function(){
+		if(this.checked){
+			$("#s_year").attr('disabled', 'true');
+			$("#s_month").attr('disabled', 'true');
+			$("#s_day").attr('disabled', 'true');
+
+		}else{
+			$("#s_year").attr('disabled', '');
+			$("#s_month").attr('disabled', '');
+			$("#s_day").attr('disabled', '');
+
+		}
+	});
+});
+
+</script>
+
+<script type="text/javascript">
+var bg;
+function b(x,y){
+
+ if(y==1){ bg ="#b03";}
+ else { bg = "#999"; }
+
+ if(document.getElementById){
+  document.getElementById(x).style.background=bg;
+ }
+ //IE4用
+ else if(document.all){
+  document.all(x).style.background=bg;
+ }
+}
+</script>
+
+<script type="text/javascript">
+function ypro_change_pic( nYproId, nImgNo, sYproThumb, sYproOrg, sYproAlt){
+
+	var nTmpIndex;
+	var sImgName1;
+	var sImgName2;
+	var sTmpHref;
+	var sTmpTitle;
+	var sNowHref;
+	var sNowTitle;
+
+	var objImg = document.getElementById( "ypro_canvas_img_" + nYproId );
+	objImg.src = sYproThumb;
+	objImg.title = sYproAlt;
+	objImg.alt = sYproAlt;
+
+	var objTxt = document.getElementById( "ypro_canvas_txt_" + nYproId );
+	objTxt.innerHTML = sYproAlt;
+
+	for( var ii=0; ii<8; ii++ ){
+
+		var objTmpA = document.getElementById( "img_" + nYproId + "_" + ( ii + 1 ) );
+		if( objTmpA != null ){
+
+			nSIndex = ( objTmpA.href ).lastIndexOf( "/" );
+			sImgName1 = ( objTmpA.href ).substring( nSIndex + 1, ( objTmpA.href ).length );
+			nSIndex = sYproOrg.lastIndexOf( "/" );
+			sImgName2 = sYproOrg.substring( nSIndex + 1, sYproOrg.length );
+
+			if( sImgName1 == sImgName2 ){
+
+				sTmpHref = objTmpA.href+"";
+				sTmpTitle = objTmpA.title+"";
+
+				var objA = document.getElementById( "ypro_canvas_a_" + nYproId );
+//				sNowHref = objA.href+"";
+//				sNowTitle = objA.title+"";
+//				objA.href = sTmpHref;
+				objA.title = sTmpTitle;
+				objA.name = objTmpA.id + "";
+
+//				objTmpA.href = sNowHref;
+//				objTmpA.title = sNowTitle;
+
+
+			}
+
+		}
+
+	}
+
+}
+
+</script>
+
+<style type="text/css">
+<!--
+	select { font-size: 100%; width: auto; }
+-->
+</style>
+<script>
+var okunoyu_html = document.getElementsByTagName("html")[0];
+okunoyu_html.setAttribute("lang", "ja");
+</script>
+<script src="https://www.okunoyu.com/assets/js/extra_reserve.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body id="ypro_body">
+<div class="logo-container">
+    <div class="logo-container-inner">
+        <p class="logo-container__logo"><a href="http://www.okunoyu.com/" title="奥の湯" target="_blank"><img src="https://www5.489pro.com/asp/data/user_data/43000032/files/logo_bk.png" alt="奥の湯"></a></p>
+        <p class="logo-container__top"><a href="https://www5.489pro.com/asp/489/menu.asp?id=43000032&lan=JPN"></a></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="ypro_wrapper">
+
+	<a name="" id=""></a>
+	
+	<!-- ▼施設名（上部）start -->
+	<div class="ypro_yado_name layout_top">
+		<p>旅館　奥の湯</p>
+	</div><!-- /.ypro_yado_name -->
+	<!-- ▲施設名（上部）end -->
+	
+
+	<!-- ▼ログアウト中　start -->
+	<div class="ypro_login_button">
+	<div class="inner bg_logout">
+
+		<p class="btn_refer"><a href="https://www5.489pro.com/asp/489/refer_login.asp?yaid=43000032&lan=JPN">予約の確認</a></p>
+		<p class="btn_change"><a href="https://www5.489pro.com/asp/489/henkou_login.asp?yaid=43000032&lan=JPN">予約の変更</a></p>
+		<p class="btn_cancel"><a href="https://www5.489pro.com/asp/489/cancel_login.asp?yaid=43000032&lan=JPN">予約のキャンセル</a></p>
+
+		<p class="btn_login"><a href="https://www5.489pro.com/asp/member/index.asp?su=43000032&lan=JPN&lfru=https%3A%2F%2Fwww5%2E489pro%2Ecom%2Fasp%2F489%2Fdate%2Easp%3Fid%3D43000032%26plan%3D30%26room%3D15%26year%3D2021%26month%3D9%26user%5Fnum%3D2%26lan%3DJPN%26ty%3Dser%26list%3DYES%26mo%3D0%26meal%3D%2D1%26m%5Fmenu%3D1%26m%5Fdate%3D1%26u%5Fn%3D2%26s%5Fn%3D0%26s%5Fr%3D0%26dt%3D4%26s%5Fy%3D2021%26s%5Fm%3D9%26s%5Fd%3D31%26s%5Fnd%3D1%26xyz%3D0%26s%5Fbmin%3D%26s%5Fbmax%3D%26s%5Fsm%3D%26plan%5Ftype%3D%2D1%26men%3D%26women%3D%26nights%3D%26dayon%3D%26first%3D%26early%3D%26long%3D%26payment%3D0">ログイン</a></p>
+
+	</div>
+	</div><!-- /.ypro_login_button -->
+	<!-- ▲ログアウト中　end -->
+
+	<!-- ▼検索結果　start -->
+	<div class="ypro_search_result">
+		<dl class="box_search_result">
+			<dt>検索結果</dt>
+			<dd>
+プランが休止中である可能性があります。[宿、プラン、部屋] 
+			</dd>
+		</dl>
+	</div><!-- .ypro_search_result -->
+	<!-- ▲検索結果　end -->
+<br />
+
+	</div><!-- ypro_package -->
+<div class="ypro_sub_button layout_bottom">
+
+</div><!-- /under_button -->
+</div><!-- wrapper -->
+<div id="okunoyu_footer" class="footer"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+<script type="text/javascript">
+$(".ypro_btn_readmore").click(function () {
+	yproReadmoreToggle( $(this) );
+});
+$(".ypro_btn_readmore_tbl").click(function () {
+	yproReadmoreTblToggle( $(this) );
+});
+
+function yproReadmoreToggle( objThis ){
+
+	if( objThis.hasClass( "ypro_btn_readmore_close" ) ){
+		objThis.prev().slideUp( "fast" );
+		objThis.addClass( "ypro_btn_readmore" );
+		objThis.removeClass( "ypro_btn_readmore_close" );
+		objThis.children("a").html( "続きを読む" );
+	}
+	else{
+		objThis.prev().slideDown( "fast" );
+		objThis.addClass( "ypro_btn_readmore_close" );
+		objThis.removeClass( "ypro_btn_readmore" );
+		objThis.children("a").html( "閉じる" );
+	}
+}
+
+function yproReadmoreTblToggle( objThis ){
+
+	if( objThis.hasClass( "ypro_btn_readmore_tbl_close" ) ){
+		objThis.prev().slideUp( "fast" );
+		objThis.addClass( "ypro_btn_readmore_tbl" );
+		objThis.removeClass( "ypro_btn_readmore_tbl_close" );
+		objThis.children("a").html( "続きを読む" );
+	}
+	else{
+		objThis.prev().slideDown( "fast" );
+		objThis.addClass( "ypro_btn_readmore_tbl_close" );
+		objThis.removeClass( "ypro_btn_readmore_tbl" );
+		objThis.children("a").html( "閉じる" );
+	}
+}
+
+</script>
+</html>

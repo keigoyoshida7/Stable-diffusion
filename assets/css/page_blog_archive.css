@@ -1,0 +1,296 @@
+@charset "utf-8";
+
+
+.article-index__list {
+	list-style: none;
+	padding: 0;
+}
+
+.article-index__item {
+	margin-bottom: 5em;
+}
+
+.sticky_article {
+	
+}
+
+.sticky_article .article-meta {
+	
+}
+
+.sticky_article .article-meta:before {
+	content: "";
+}
+
+
+@media screen and (min-width: 541px) {
+	
+	.article-index {
+		padding-top: 0;
+		border-top: none;
+	}
+	
+	.article-index__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	
+	.article-index__list:before,
+	.article-index__list:after {
+		display: block;
+		content: "";
+		width: calc(50% - 20px);
+		height: 1px;
+		order: 2;
+	}
+	
+	.article-index__item {
+		width: calc(50% - 20px);
+		padding: 0;
+		box-sizing: border-box;
+		order: 1;
+	}
+}
+
+
+@media screen and (min-width: 1024px) {
+	
+	.article-index {
+		
+	}
+	
+	.article-index__list:before,
+	.article-index__list:after {
+		width: calc(33.333% - 20px);
+	}
+	
+	.article-index__item {
+		width: calc(33.333% - 20px);
+	}
+}
+
+@media screen and (min-width: 1281px) {
+	/* 3row */
+	.article-index__list:before,
+	.article-index__list:after {
+		width: calc(33.333% - 30px);
+	}
+	
+	.article-index__item {
+		width: calc(33.333% - 30px);
+	}
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+.article__anchor {
+	position: relative;
+	display: block;
+	text-decoration: none;
+}
+
+.article__anchor:before,
+.article__anchor:after {
+	position: absolute;
+	left: 20px;
+	top: -20px;
+	display: block;
+	width: 1px;
+	height: calc(20% + 40px);
+	background-color: rgba(50,50,50,1);
+	content: "";
+	opacity: 0.2;
+	z-index: 2;
+	transition: height 0.25s ease;
+}
+
+.article__anchor:after {
+	height: 0%;
+	background-color: rgba(50,50,50,1);
+	opacity: 1;
+	z-index: 3;
+}
+
+.article__anchor:hover {
+	text-decoration: none;
+}
+
+.article__anchor:hover:after {
+	height: calc(20% + 40px);
+}
+
+.article-img {
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 1.5em;
+	
+	-webkit-clip-path: var(--grunge);
+	        clip-path: var(--grunge);
+}
+
+.article-index__item:nth-child(even) .article-img {
+	-webkit-clip-path: var(--grunge-b);
+	        clip-path: var(--grunge-b);
+}
+
+.article-img img {
+	display: block;
+	width: 100%;
+	transform: scale(1);
+	transition: transform 1s cubic-bezier(.17,.84,.44,1);
+}
+
+.object-fit .article-img img {
+	object-fit: cover;
+	height: 230px;
+}
+
+/* msie */
+.no-object-fit .article-img {
+	position: relative;
+	overflow: hidden;
+	height: 230px;
+	background-color: #000;
+}
+
+.no-object-fit .article-img img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.article-meta {
+	margin-bottom: 0.5em;
+	padding-left: 20px;
+	font-size: 1.1rem;
+	font-weight: 500;
+	transition: color 0.5s ease-out;
+}
+
+.article-meta__item {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.article-meta__item:last-child {
+	margin-right: 0;
+}
+
+.article-ttl {
+	padding-left: 20px;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #555;
+	transition: color 0.5s ease-out;
+	word-wrap: break-word;
+}
+
+.article-ttl:empty:before {
+	content: "タイトルなし";
+}
+
+.article-txt {
+	overflow: hidden;
+	height: 5.4em;
+	font-size: 1.2rem;
+	line-height: 1.8;
+	color: #ccc;
+	transition: color 0.5s ease-out;
+}
+
+a:hover .article-meta {
+	color: #000;
+}
+
+a:hover .article-ttl {
+	color: #000;
+}
+
+a:hover .article-txt {
+	color: #555;
+}
+
+@media screen and (min-width: 541px) {
+	.article__anchor {
+		padding: 0;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.object-fit .article-img img {
+		object-fit: cover;
+		height: 260px;
+	}
+}
+
+/* ----------------------------------------------------------- */
+
+.js-articles-container .article-index__item {
+	transition: transform 0.5s cubic-bezier(0.17, 0.84, 0.44, 1.0), opacity 0.25s ease-in-out;
+	transform: translateY(100px);
+	opacity: 0;
+}
+
+.js-articles-container.show .article-index__item {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+/* -------------------------- */
+
+.js-more {
+	position: relative;
+	text-align: center;
+	margin-bottom: 120px;
+	overflow: hidden;
+	transition: all 0.5s ease;
+}
+
+.js-more.hide {
+	
+}
+
+.js-more.loading:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	width: 25px;
+	height: 25px;
+	display: block;
+	margin: auto;
+	background-image: url(../img/global/indicator_k.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 25px 300px;
+	animation: indicatorAnimation 1s steps(12) infinite;
+}
+
+.js-more button {
+	min-width: 250px;
+	padding: 20px;
+	overflow: hidden;
+	transition: all 0.25s ease;
+}
+
+.js-more.hide button {
+	opacity: 0;
+	cursor: auto;
+	pointer-events: none;
+}
+
+#article-finish {
+	margin: 60px auto 0;
+	background-color: rgba(0,0,0,0.2);
+	height: 1px;
+	max-width: 100px;
+	width: 50%;
+}
+

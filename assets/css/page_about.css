@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+.chapter-header,
+.chapter-body {
+	max-width: 40em;
+	margin: auto;
+	text-align: center;
+}
+
+.message .chapter-body {
+	text-align: left;
+}
+
+[lang="ja"] .message .chapter-body {
+	text-align: justify;
+	letter-spacing: 0.05em;
+}

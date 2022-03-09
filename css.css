@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Noto Serif KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/notoserifkr/v17/3Jn7SDn90Gmq2mr3blnHaTZXRudj1g.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Serif KR';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/notoserifkr/v17/3JnmSDn90Gmq2mr3blnHaTZXTjhHwOxTNg.otf) format('opentype');
+}

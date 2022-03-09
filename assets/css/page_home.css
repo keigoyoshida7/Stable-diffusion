@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+html.msie {
+	overflow-y: visible !important;
+}
+
+.gh-logo {
+	opacity: 0;
+}
+
+
+/* --------------------------------------------------- */
+
+.blog {
+	
+}
+
+/* --------------------------------------------------- */
+
+.article-index {
+	padding: 0;
+}
+
+.article-index-nav {
+	
+}
+
+.article-index-nav-list {
+	list-style: none;
+	padding-left: 0;
+	display: flex;
+	margin: 0 0 3em;
+}
+
+.article-index-nav-list li {
+	margin-right: 2em;
+	list-style: none;
+}
+
+.article-index-nav-list a {
+	text-decoration: none;
+}
+
+.article-index-nav-list .current {
+	font-weight: 500;
+	color: #000;
+	border-bottom: 1px solid currentColor;
+}
+
+/* --------------------------------------------------- */
+
+.section {
+	padding: 100px 0;
+}
+
+.section__header {
+	text-align: center;
+}
+
+.section__header-ttl {
+	font-size: 1.8rem;
+}
+
+.section__header-ttl a {
+	text-decoration: none;
+}
+
+@media screen and (min-width: 1024px) {
+	.section {
+		padding: 140px 0;
+	}
+	
+	.section__header-ttl {
+		font-size: 2.4rem;
+	}
+}
+
+/* --------------------------------------------------- */
+
+.blog {
+	padding-bottom: 0;
+}
+
+.blog__footer {
+	
+}
+
+/* --------------------------------------------------- */
+/* home only */
+
+.article-index {
+	padding-bottom: 30px;
+}
+
+.article-index__item {
+	margin-bottom: 10px;
+}
+
+.object-fit .article-img img {
+	height: calc(20px + 50vw);
+}
+
+.article-index--swipe {
+	margin: 0 0 0;
+	width: 100%;
+}
+
+.article-index--swipe .article-index__list {
+	display: flex;
+	flex-grow: 1;
+	align-items: flex-start;
+	margin: 0;
+	padding: 0;
+	
+	overflow-x: scroll;
+	overflow-y: visible;
+	
+	-webkit-overflow-scrolling: touch;
+	        overflow-scrolling: touch;
+	-webkit-scroll-snap-type: mandatory;
+	    -ms-scroll-snap-type: mandatory;
+	        scroll-snap-type: mandatory;
+	
+	/* older firefox and safari */
+	-webkit-scroll-snap-destination: 50% 0%;
+	        scroll-snap-destination: 50% 0%;
+}
+
+.article-index--swipe .article-index__item {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: auto;
+	width: calc(100vw - 100px);
+	padding: 0;
+	margin-right: 40px;
+	box-sizing: border-box;
+	
+	/* older firefox and safari */
+	-webkit-scroll-snap-coordinate: 50% 0%;
+	        scroll-snap-coordinate: 50% 0%;
+	
+	/* latest */
+	scroll-snap-align: center;
+	scroll-padding: 50%;
+}
+
+.article-index--swipe .article-index__item:first-child {
+	padding-left: 50px;
+	width: calc(100vw - 50px);
+}
+
+.article-index--swipe .article-index__item:last-child {
+	padding-right: 50px;
+	width: calc(100vw - 50px);
+}
+
+.article-index--swipe .article-index__item:nth-child(even) {
+	
+}
+
+
+@media screen and (min-width: 541px) {
+	
+	.article-index--swipe .article-index__list {
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	
+	.object-fit .article-img img {
+		object-fit: cover;
+		height: auto;
+	}
+	
+	.article-index {
+		width: calc(100% - 120px);
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	.article-index--swipe .article-index__list {
+		display: flex;
+		flex-wrap: wrap;
+		overflow: auto;
+		justify-content: space-between;
+	}
+	
+	.article-index--swipe .article-index__item,
+	.article-index--swipe .article-index__item:first-child,
+	.article-index--swipe .article-index__item:last-child,
+	.article-index--swipe .article-index__list:before,
+	.article-index--swipe .article-index__list:after {
+		flex-grow: 0;
+		flex-shrink: 1;
+		width: calc(50% - 20px);
+		padding: 0;
+		margin: 0 0 60px;
+	}
+	
+	
+	.article-index__list.js-grid {
+		overflow: visible;
+	}
+	
+	.article-index__list.js-grid:before,
+	.article-index__list.js-grid:after {
+		display: none;
+		content: none;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.article-index--swipe .article-index__item,
+	.article-index--swipe .article-index__item:first-child,
+	.article-index--swipe .article-index__item:last-child,
+	.article-index--swipe .article-index__list:before,
+	.article-index--swipe .article-index__list:after {
+		width: calc(33.333% - 40px);
+	}
+	
+	.article-index {
+		width: calc(100% - 240px);
+	}
+}
+
+.video {
+	display: none;
+}
+
+@media screen and (min-width: 1024px) {
+	.video {
+		display: block;
+		z-index: 2;
+		width: 320px;
+		margin-bottom: 40px;
+	}
+}
